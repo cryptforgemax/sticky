@@ -296,7 +296,7 @@ export class Application extends Adw.Application {
     this.add_action(settings.create_action("color-scheme"));
 
     this.set_accels_for_action("app.quit", ["<Primary>q"]);
-    this.set_accels_for_action("app.new-note", ["<Primary>n"]);
+    this.set_accels_for_action("app.new-note", ["<Primary>o"]);
     this.set_accels_for_action("app.all-notes", ["<Primary>h"]);
     // this.set_accels_for_action("app.cycle", ["<Primary><Shift>a"]);
     // this.set_accels_for_action("app.cycle-reverse", ["<Primary><Shift>b"]);
@@ -305,7 +305,7 @@ export class Application extends Adw.Application {
 
     this.set_accels_for_action("win.open-primary-menu", ["F10"]);
     this.set_accels_for_action("win.show-help-overlay", ["<Primary>question"]);
-    this.set_accels_for_action("window.close", ["<Primary>w"]);
+    this.set_accels_for_action("window.close", ["<Primary>f"]);
 
     this.set_accels_for_action("win.bold", ["<Primary>b"]);
     this.set_accels_for_action("win.italic", ["<Primary>i"]);

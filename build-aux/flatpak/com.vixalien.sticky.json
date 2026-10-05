@@ -1,64 +1,66 @@
 {
-  "id": "com.vixalien.sticky",
-  "runtime": "org.gnome.Platform",
-  "runtime-version": "master",
-  "sdk": "org.gnome.Sdk",
-  "sdk-extensions": [
-    "org.freedesktop.Sdk.Extension.node20"
-  ],
-  "tags": [
-    "nightly"
-  ],
-  "build-options": {
-    "append-path": "/usr/lib/sdk/node20/bin"
-  },
-  "command": "com.vixalien.sticky",
-  "finish-args": [
-    "--share=ipc",
-    "--device=dri",
-    "--socket=wayland",
-    "--socket=fallback-x11",
-    "--env=GJS_DISABLE_JIT=1"
-  ],
-  "cleanup": [
-    "/include",
-    "/lib/pkgconfig",
-    "/man",
-    "/share/doc",
-    "/share/gtk-doc",
-    "/share/man",
-    "/share/pkgconfig",
-    "*.la",
-    "*.a",
-    "/yarn-mirror"
-  ],
-  "modules": [
-    {
-      "name": "yarn-deps",
-      "buildsystem": "simple",
-      "build-commands": [
-        "/usr/lib/sdk/node20/enable.sh",
-        "mkdir -p /app",
-        "cp -r $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror/ /app",
-        "echo $'yarn-offline-mirror \"/app/yarn-mirror\"' > /app/.yarnrc"
-      ],
-      "sources": [
-        "generated-sources.json"
-      ]
+    "id" : "com.vixalien.sticky",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "50",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.node20"
+    ],
+    "tags" : [
+        "nightly"
+    ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/node20/bin",
+        "env" : {        }
     },
-    {
-      "name": "sticky-notes",
-      "buildsystem": "meson",
-      "config-opts": [
-        "-Dyarnrc=/app/.yarnrc"
-      ],
-      "sources": [
+    "command" : "com.vixalien.sticky",
+    "finish-args" : [
+        "--share=ipc",
+        "--device=dri",
+        "--socket=wayland",
+        "--socket=fallback-x11",
+        "--env=GJS_DISABLE_JIT=1"
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a",
+        "/yarn-mirror"
+    ],
+    "modules" : [
         {
-          "type": "git",
-          "url": "../..",
-          "branch": "HEAD"
+            "name" : "yarn-deps",
+            "buildsystem" : "simple",
+            "build-commands" : [
+                "/usr/lib/sdk/node20/enable.sh",
+                "mkdir -p /app",
+                "cp -r $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror/ /app",
+                "echo $'yarn-offline-mirror \"/app/yarn-mirror\"' > /app/.yarnrc"
+            ],
+            "sources" : [
+                "generated-sources.json"
+            ]
+        },
+        {
+            "name" : "sticky-notes",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dyarnrc=/app/.yarnrc",
+                "--libdir=lib"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "../..",
+                    "branch" : "HEAD"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
